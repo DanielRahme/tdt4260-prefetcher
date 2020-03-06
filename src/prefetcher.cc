@@ -14,6 +14,7 @@ void prefetch_init(void)
     /* Called before any calls to prefetch_access. */
     /* This is the place to initialize data structures. */
 
+    // Added comment to see if Alberto can commit
     DPRINTF(HWPrefetch, "Initialized sequential-on-access prefetcher\n");
     fprintf(stderr, "Hello prefetch init, stderr!\n");
     printf("Hello prefetch init, printf!\n");
