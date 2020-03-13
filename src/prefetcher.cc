@@ -8,22 +8,27 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+
 
 void prefetch_init(void)
 {
     /* Called before any calls to prefetch_access. */
     /* This is the place to initialize data structures. */
 
+
     // Added comment to see if Alberto can commit
     DPRINTF(HWPrefetch, "Initialized sequential-on-access prefetcher\n");
     fprintf(stderr, "Hello prefetch init, stderr!\n");
     printf("Hello prefetch init, printf!\n");
+    std::cout << __cplusplus << std::endl;
 }
 
 void prefetch_access(AccessStat stat)
 {
     fprintf(stderr, "Hello prefetch access, stderr!\n");
     printf("Hello prefetch access, printf!\n");
+    printf("This is version %d", __cplusplus);
     DPRINTF(HWPrefetch, "We are in the prefetch access\n");
     /* pf_addr is now an address within the _next_ cache block */
     Addr pf_addr = stat.mem_addr + BLOCK_SIZE;
