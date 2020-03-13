@@ -11,18 +11,12 @@
 #include <stdlib.h>
 #include <iostream>
 
-void print_stat(AccessStat stat)
-{
-    printf("PC:%d\nmem_addr:%d\ntime:%d\nmiss:%d\n\n", stat.pc, stat.mem_addr, stat.time, stat.miss);
-}
 
 void prefetch_init(void)
 {
     /* Called before any calls to prefetch_access. */
     /* This is the place to initialize data structures. */
 
-
-    // Added comment to see if Alberto can commit
     //DPRINTF(HWPrefetch, "Initialized sequential-on-access prefetcher\n");
     printf("Hello prefetch init, printf!\n");
     std::cout << __cplusplus << std::endl;
@@ -46,10 +40,22 @@ void prefetch_access(AccessStat stat)
 }
 
 void prefetch_complete(Addr addr) {
-    DPRINTF(HWPrefetch, "We are in the prefetch complete\n");
-    fprintf(stderr, "Hello prefetch complete, standard err!\n");
-    printf("Hello prefetch complete, regular printf!\n");
+    //DPRINTF(HWPrefetch, "We are in the prefetch complete\n");
+    printf("Hello prefetch complete, printf!\n");
+    std::cout << "Address:" << addr << "\n\n";
     /*
      * Called when a block requested by the prefetcher has been loaded.
      */
+}
+
+
+//------------------------------------------------------------------------------
+//--------------------------> Custom functions <--------------------------------
+//------------------------------------------------------------------------------
+void print_stat(AccessStat stat)
+{
+    std::cout << "pc:" << stat.pc << '\n'
+        << "mem_addr:" << stat.mem_addr << '\n' 
+        << "time:" << stat.time << '\n' 
+        << "miss:" << stat.miss << '\n' << '\n';
 }
