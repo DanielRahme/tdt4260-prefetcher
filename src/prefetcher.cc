@@ -48,12 +48,42 @@
 #define TABLE_SIZE 256
 #define MAX_STRIDE_MUL 4
 
+namespace rpt {
+
+
+    enum State {
+        INITIAL, 
+        TRANSIENT, 
+        STEADY, 
+        NO_PREDICTION
+    };
+
+
+    struct rpt_t {
+        Addr tag;
+        Addr prev_addr;
+        uint64_t stride;
+        State state;
+
+    };
+
+    void hello() {
+        printf("Hello from rpt!\n");
+    }
+
+    void inc(int& x) {
+        x++;
+    }
+
+}
 
 enum PredictionState {
     INITIAL, TRANSIENT, STEADY, NO_PREDICTION,
 };
 
 
+// TODO: new struct
+//
 struct ReferencePrediction {
     Addr tag;
     Addr prev_addr;
@@ -66,6 +96,7 @@ struct ReferencePrediction {
 };
 
 
+// TODO: default constructor
 ReferencePrediction::ReferencePrediction()
     : tag(0), prev_addr(0), stride(0), times(1), state(INITIAL)
 { }
@@ -187,6 +218,11 @@ void prefetch_init(void)
 {
     DPRINTF(HWPrefetch, "Initialized stride-directed prefetcher\n");
     // Not used.
+    rpt::hello();
+    int x = 3;
+    std::cout << "Var x before: " << x << std::endl;
+    rpt::inc(x);
+    std::cout << "Var x after: " << x << std::endl;
 }
 
 
