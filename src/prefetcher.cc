@@ -44,6 +44,8 @@
 
 
 #include "interface.hh"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define TABLE_SIZE 256
 #define MAX_STRIDE_MUL 4
