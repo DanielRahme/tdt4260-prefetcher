@@ -65,8 +65,8 @@ namespace rpt {
         Addr tag;
         Addr prev_addr;
         uint64_t stride;
+        uint32_t times;
         State state;
-        uint8_t times;
 
     };
 
@@ -76,18 +76,18 @@ namespace rpt {
             .tag = 0,
             .prev_addr = 0,
             .stride = 0,
-            .state = INITIAL,
-            .times = 1
+            .times = 1,
+            .state = INITIAL
         };
     }
 
-    void print_entry(rpt_t entry) {
+    void print_entry(const rpt_t &entry) {
         std::cout << "tag=" << entry.tag 
                   << " prev_addr=" << entry.prev_addr
                   << " stride=" << entry.stride
-                  << " state=" << entry.state
                   << " times=" << entry.times
-                  << "\n\n";
+                  << " state=" << entry.state
+                  << std::endl;
     }
 
     void init(rpt_t table[TABLE_SIZE]) {
