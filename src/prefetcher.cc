@@ -66,16 +66,53 @@ namespace rpt {
         Addr prev_addr;
         uint64_t stride;
         State state;
+        uint8_t times;
 
     };
 
-    void hello() {
-        printf("Hello from rpt!\n");
+
+    rpt_t empty_entry() {
+        return (rpt_t){
+            .tag = 0,
+            .prev_addr = 0,
+            .stride = 0,
+            .state = INITIAL,
+            .times = 1
+        };
     }
 
-    void inc(int& x) {
-        x++;
+    void print_entry(rpt_t entry) {
+        std::cout << "tag=" << entry.tag 
+                  << " prev_addr=" << entry.prev_addr
+                  << " stride=" << entry.stride
+                  << " state=" << entry.state
+                  << " times=" << entry.times
+                  << "\n\n";
     }
+
+    void init(rpt_t table[TABLE_SIZE]) {
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            table[i] = empty_entry();
+        }
+    }
+
+
+    void print(rpt_t table[TABLE_SIZE]) {
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            print_entry(table[i]);
+        }
+    }
+
+    // initialize (zero out)
+    // Search function (has)
+    // Get element
+    // Prefetch (issue pref)
+    //
+    // Add entry
+    // Check correct
+    // Update multiplier
+    // Update stride
+    // Issue prefetch
 
 }
 
@@ -189,7 +226,7 @@ void prefetch_access(AccessStat stat)
         if (ref->times > 1) { --(ref->times); }
     }
 
-    // Update entry.
+    // Update stride
     if (prev_state == STEADY && !correct) {
         // Do not update the stride. This gives the prediction a chance to
         // return to the STEADY state if the next prediction is correct.
@@ -220,11 +257,12 @@ void prefetch_init(void)
 {
     DPRINTF(HWPrefetch, "Initialized stride-directed prefetcher\n");
     // Not used.
-    rpt::hello();
-    int x = 3;
-    std::cout << "Var x before: " << x << std::endl;
-    rpt::inc(x);
-    std::cout << "Var x after: " << x << std::endl;
+    //rpt_t table[TABLE_SIZE];
+    //rpt::init(table);
+    //rpt::print(table);
+    //
+    rpt::print_entry(rpt::empty_entry());
+    rpt::print_entry(rpt::empty_entry());
 }
 
 
