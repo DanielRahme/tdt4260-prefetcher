@@ -257,12 +257,12 @@ void prefetch_init(void)
 {
     DPRINTF(HWPrefetch, "Initialized stride-directed prefetcher\n");
     // Not used.
-    //rpt_t table[TABLE_SIZE];
-    //rpt::init(table);
-    //rpt::print(table);
+    rpt_t table[TABLE_SIZE]; // Make own type
+    rpt::init(table);
+    rpt::print(table);
     //
-    rpt::print_entry(rpt::empty_entry());
-    rpt::print_entry(rpt::empty_entry());
+    //rpt::print_entry(rpt::empty_entry());
+    //rpt::print_entry(rpt::empty_entry());
 }
 
 
